@@ -188,7 +188,7 @@
     <rownum_field/>
     <include_filename>N</include_filename>
     <separator>&#x3b;</separator>
-    <enclosure>&#x22;</enclosure>
+    <enclosure/>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>
