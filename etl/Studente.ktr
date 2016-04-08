@@ -2258,6 +2258,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Codice Fiscale</name>
+        <rename>CF</rename>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>Data nascita</name>
         <rename>DataDiNascita</rename>
