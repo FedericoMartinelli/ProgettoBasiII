@@ -1,0 +1,68 @@
+<Schema name="Esami">
+  <Dimension name="CFUEsame">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="CFUEsame" uniqueMembers="false" column="CFUEsame" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KAnnoAccademico">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="KAnnoAccademico" uniqueMembers="false" column="KAnnoAccademico" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KCorso">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="KCorso" uniqueMembers="false" column="KCorso" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KCorsoDiStudio">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="KCorsoDiStudio" uniqueMembers="false" column="KCorsoDiStudio" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KStudente">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="KStudente" uniqueMembers="false" column="KStudente" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KTempo">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="KTempo" uniqueMembers="false" column="KTempo" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="VotoEsame">
+    <Hierarchy hasAll="true">
+      <Table name="Esami" schema="AVA"/>
+      <Level name="VotoEsame" uniqueMembers="false" column="VotoEsame" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Esami">
+    <Table name="Esami" schema="AVA"/>
+    <DimensionUsage name="CFUEsame" source="CFUEsame"/>
+    <DimensionUsage name="KAnnoAccademico" source="KAnnoAccademico"/>
+    <DimensionUsage name="KCorso" source="KCorso"/>
+    <DimensionUsage name="KCorsoDiStudio" source="KCorsoDiStudio"/>
+    <DimensionUsage name="KStudente" source="KStudente"/>
+    <DimensionUsage name="KTempo" source="KTempo"/>
+    <DimensionUsage name="VotoEsame" source="VotoEsame"/>
+    <Measure name="CFUEsame" column="CFUEsame" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KAnnoAccademico" column="KAnnoAccademico" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KCorso" column="KCorso" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KCorsoDiStudio" column="KCorsoDiStudio" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KStudente" column="KStudente" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KTempo" column="KTempo" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="VotoEsame" column="VotoEsame" aggregator="sum" formatString="&#x23;"/>
+  </Cube>
+</Schema>

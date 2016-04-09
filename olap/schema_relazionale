@@ -1,0 +1,352 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.3.12
+-- Dumped by pg_dump version 9.3.12
+-- Started on 2016-04-09 16:37:54 CEST
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- TOC entry 8 (class 2615 OID 17197)
+-- Name: AVA; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA "AVA";
+
+
+ALTER SCHEMA "AVA" OWNER TO postgres;
+
+--
+-- TOC entry 1 (class 3079 OID 11791)
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- TOC entry 2046 (class 0 OID 0)
+-- Dependencies: 1
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = "AVA", pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 175 (class 1259 OID 17270)
+-- Name: Anno Accademico; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Anno Accademico" (
+    "KAnnoAccademico" integer NOT NULL,
+    "NomeAnnoX" integer,
+    "NomeAnnoX-1" integer,
+    "NomeAnnoX-1/X" character varying
+);
+
+
+ALTER TABLE "AVA"."Anno Accademico" OWNER TO postgres;
+
+--
+-- TOC entry 172 (class 1259 OID 17198)
+-- Name: Corso; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Corso" (
+    "KCorso" integer NOT NULL,
+    "Nome" text,
+    "NumeroCFU" numeric,
+    "SSD" text,
+    "CodiceCorso" text
+);
+
+
+ALTER TABLE "AVA"."Corso" OWNER TO postgres;
+
+--
+-- TOC entry 173 (class 1259 OID 17206)
+-- Name: CorsoDiStudi; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "CorsoDiStudi" (
+    "KCorsoDiStudio" integer NOT NULL,
+    "NomeCds" text,
+    "TipoCds" text,
+    "NomeDipartimento" text,
+    "CodiceAteneo" text,
+    "CodiceDipartimento" character varying,
+    "CodiceCds" character varying,
+    "AnnoValidita" character varying
+);
+
+
+ALTER TABLE "AVA"."CorsoDiStudi" OWNER TO postgres;
+
+--
+-- TOC entry 181 (class 1259 OID 17396)
+-- Name: Esami; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Esami" (
+    "KStudente" integer NOT NULL,
+    "KAnnoAccademico" integer NOT NULL,
+    "KTempo" integer NOT NULL,
+    "KCorsoDiStudio" integer NOT NULL,
+    "KCorso" integer NOT NULL,
+    "VotoEsame" integer,
+    "CFUEsame" integer
+);
+
+
+ALTER TABLE "AVA"."Esami" OWNER TO postgres;
+
+--
+-- TOC entry 182 (class 1259 OID 17430)
+-- Name: Ingressi; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Ingressi" (
+    "KStudente" integer NOT NULL,
+    "KAnnoAccademico" integer NOT NULL,
+    "KCorsoDiStudio" integer NOT NULL,
+    "KTempo" integer NOT NULL,
+    "KTipoImmatricolazione" integer NOT NULL,
+    "PunteggioTestAmmissione" text,
+    "Immatricolato" integer,
+    "Evento" character(2) NOT NULL
+);
+
+
+ALTER TABLE "AVA"."Ingressi" OWNER TO postgres;
+
+--
+-- TOC entry 180 (class 1259 OID 17362)
+-- Name: Lauree; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Lauree" (
+    "KStudente" integer NOT NULL,
+    "KCorsoDiStudio" integer NOT NULL,
+    "KAnnoAccademico" integer NOT NULL,
+    "KTempo" integer NOT NULL,
+    "VotoLaurea" character varying
+);
+
+
+ALTER TABLE "AVA"."Lauree" OWNER TO postgres;
+
+--
+-- TOC entry 177 (class 1259 OID 17310)
+-- Name: Studente; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Studente" (
+    "KStudente" integer NOT NULL,
+    "TitoloDiStudio" text,
+    "RegioneResidenza" text,
+    "ProvinciaResidenza" text,
+    "ComuneResidenza" text,
+    "Sesso" text,
+    "Cittadinanza" text,
+    "StatoResidenza" text,
+    "VotoScuolaMediaSuperiore" text,
+    "NazioneDiploma" text,
+    "TipoScuolaMediaSuperiore" text,
+    "IstitutoScuolaMediaSuperiore" text,
+    "DataDiNascita" character varying,
+    "Coorte" integer,
+    "AnnoDiploma" integer,
+    "CF" text
+);
+
+
+ALTER TABLE "AVA"."Studente" OWNER TO postgres;
+
+--
+-- TOC entry 178 (class 1259 OID 17334)
+-- Name: Tempo; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Tempo" (
+    "KTempo" integer NOT NULL,
+    "Anno" integer,
+    "Mese" integer,
+    "Giorno" integer
+);
+
+
+ALTER TABLE "AVA"."Tempo" OWNER TO postgres;
+
+--
+-- TOC entry 174 (class 1259 OID 17218)
+-- Name: Tipo Immatricolazione; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Tipo Immatricolazione" (
+    "KTipoImmatricolazione" integer NOT NULL,
+    "TipoImmatricolazione" text,
+    "CodiceTipoImmatricolazione" character(1)
+);
+
+
+ALTER TABLE "AVA"."Tipo Immatricolazione" OWNER TO postgres;
+
+--
+-- TOC entry 179 (class 1259 OID 17341)
+-- Name: Tipo Iscrizione; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Tipo Iscrizione" (
+    "KTipoIscrizione" integer NOT NULL,
+    "AnniFuoriCorso" integer,
+    "AnnoIscrizioneCorso" integer,
+    "InCorso/FuoriCorso" character(2)
+);
+
+
+ALTER TABLE "AVA"."Tipo Iscrizione" OWNER TO postgres;
+
+--
+-- TOC entry 176 (class 1259 OID 17282)
+-- Name: Tipo Uscita; Type: TABLE; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE "Tipo Uscita" (
+    "KTipoUscita" integer NOT NULL,
+    "TipoUscita" text
+);
+
+
+ALTER TABLE "AVA"."Tipo Uscita" OWNER TO postgres;
+
+--
+-- TOC entry 1917 (class 2606 OID 17277)
+-- Name: Anno Accademico_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Anno Accademico"
+    ADD CONSTRAINT "Anno Accademico_pkey" PRIMARY KEY ("KAnnoAccademico");
+
+
+--
+-- TOC entry 1913 (class 2606 OID 17213)
+-- Name: CorsoDiStudi_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "CorsoDiStudi"
+    ADD CONSTRAINT "CorsoDiStudi_pkey" PRIMARY KEY ("KCorsoDiStudio");
+
+
+--
+-- TOC entry 1911 (class 2606 OID 17202)
+-- Name: Corso_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Corso"
+    ADD CONSTRAINT "Corso_pkey" PRIMARY KEY ("KCorso");
+
+
+--
+-- TOC entry 1929 (class 2606 OID 17400)
+-- Name: Esami_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Esami"
+    ADD CONSTRAINT "Esami_pkey" PRIMARY KEY ("KStudente", "KAnnoAccademico", "KTempo", "KCorsoDiStudio", "KCorso");
+
+
+--
+-- TOC entry 1931 (class 2606 OID 17483)
+-- Name: Ingressi_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Ingressi"
+    ADD CONSTRAINT "Ingressi_pkey" PRIMARY KEY ("KStudente", "KAnnoAccademico", "KCorsoDiStudio", "KTempo", "KTipoImmatricolazione", "Evento");
+
+
+--
+-- TOC entry 1927 (class 2606 OID 17369)
+-- Name: Lauree_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Lauree"
+    ADD CONSTRAINT "Lauree_pkey" PRIMARY KEY ("KStudente", "KCorsoDiStudio", "KAnnoAccademico", "KTempo");
+
+
+--
+-- TOC entry 1921 (class 2606 OID 17317)
+-- Name: Studente_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Studente"
+    ADD CONSTRAINT "Studente_pkey" PRIMARY KEY ("KStudente");
+
+
+--
+-- TOC entry 1923 (class 2606 OID 17338)
+-- Name: Tempo_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Tempo"
+    ADD CONSTRAINT "Tempo_pkey" PRIMARY KEY ("KTempo");
+
+
+--
+-- TOC entry 1915 (class 2606 OID 17225)
+-- Name: Tipo Immatricolazione_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Tipo Immatricolazione"
+    ADD CONSTRAINT "Tipo Immatricolazione_pkey" PRIMARY KEY ("KTipoImmatricolazione");
+
+
+--
+-- TOC entry 1919 (class 2606 OID 17289)
+-- Name: Tipo Uscita_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Tipo Uscita"
+    ADD CONSTRAINT "Tipo Uscita_pkey" PRIMARY KEY ("KTipoUscita");
+
+
+--
+-- TOC entry 1925 (class 2606 OID 17345)
+-- Name: TipoIscrizione_pkey; Type: CONSTRAINT; Schema: AVA; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY "Tipo Iscrizione"
+    ADD CONSTRAINT "TipoIscrizione_pkey" PRIMARY KEY ("KTipoIscrizione");
+
+
+--
+-- TOC entry 2045 (class 0 OID 0)
+-- Dependencies: 6
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+-- Completed on 2016-04-09 16:37:55 CEST
+
+--
+-- PostgreSQL database dump complete
+--
+

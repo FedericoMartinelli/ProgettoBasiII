@@ -1,0 +1,49 @@
+<Schema name="Lauree">
+  <Dimension name="KAnnoAccademico">
+    <Hierarchy hasAll="true">
+      <Table name="Lauree" schema="AVA"/>
+      <Level name="KAnnoAccademico" uniqueMembers="false" column="KAnnoAccademico" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KCorsoDiStudio">
+    <Hierarchy hasAll="true">
+      <Table name="Lauree" schema="AVA"/>
+      <Level name="KCorsoDiStudio" uniqueMembers="false" column="KCorsoDiStudio" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KStudente">
+    <Hierarchy hasAll="true">
+      <Table name="Lauree" schema="AVA"/>
+      <Level name="KStudente" uniqueMembers="false" column="KStudente" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="KTempo">
+    <Hierarchy hasAll="true">
+      <Table name="Lauree" schema="AVA"/>
+      <Level name="KTempo" uniqueMembers="false" column="KTempo" type="Numeric">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension name="VotoLaurea">
+    <Hierarchy hasAll="true">
+      <Table name="Lauree" schema="AVA"/>
+      <Level name="VotoLaurea" uniqueMembers="false" column="VotoLaurea" type="String">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="Lauree">
+    <Table name="Lauree" schema="AVA"/>
+    <DimensionUsage name="KAnnoAccademico" source="KAnnoAccademico"/>
+    <DimensionUsage name="KCorsoDiStudio" source="KCorsoDiStudio"/>
+    <DimensionUsage name="KStudente" source="KStudente"/>
+    <DimensionUsage name="KTempo" source="KTempo"/>
+    <DimensionUsage name="VotoLaurea" source="VotoLaurea"/>
+    <Measure name="KAnnoAccademico" column="KAnnoAccademico" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KCorsoDiStudio" column="KCorsoDiStudio" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KStudente" column="KStudente" aggregator="sum" formatString="&#x23;"/>
+    <Measure name="KTempo" column="KTempo" aggregator="sum" formatString="&#x23;"/>
+  </Cube>
+</Schema>
